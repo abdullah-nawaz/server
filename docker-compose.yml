@@ -1,0 +1,28 @@
+# Create docker network before deploying this docker-compose file using following command
+# docker network create --driver bridge vpcplus_network || true
+
+version: '3.3'
+
+services:
+  gcpweb:
+    restart: always
+    build: .
+    ports:
+      - 8000:8000
+    container_name: gcpweb
+    entrypoint: /server/bin/run_web.sh
+    environment:
+      SEC_LINK: http://gcpwebsec:8000
+    volumes:
+      - .:/server
+    networks:
+      - vpcplus_network
+      - sec-server_default
+
+  redis:
+    image: redis
+
+networks:
+  sec-server_default:
+    external: true
+  vpcplus_network:
