@@ -13,6 +13,7 @@ services:
     entrypoint: /server/bin/run_web.sh
     environment:
       SEC_LINK: http://gcpwebsec:8000
+      ENV_GRPC_HOST: grpc_server-rpc
     volumes:
       - .:/server
     networks:

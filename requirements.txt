@@ -1,4 +1,6 @@
 fastapi
 uvicorn
 requests
+grpcio==1.30.0
+grpcio-tools==1.30.0
 sec-client/

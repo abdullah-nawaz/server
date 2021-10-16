@@ -15,9 +15,21 @@ def read_root():
     res = client.read_root_get()
     print(res)
 
-    return {"Hello": "World"}
+    from configs import GrpcClientConfigs
+    from grpc_server_client import create_rpc_client
+
+    rpc = create_rpc_client(GrpcClientConfigs)
+    users = rpc.get_users()
+    print(users)
+
+    return {"Hello": "Worldd"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/users}")
+def read_item():
+    from configs import GrpcClientConfigs
+    from grpc_server_client import create_rpc_client
+
+    rpc = create_rpc_client(GrpcClientConfigs)
+    users = rpc.get_users()
+    return users
